@@ -6,7 +6,7 @@ permalink: /
 
 profile:
   align: right
-  image: Profile_photo.jpg
+  image: Profile_photo2.jpg
   # address: >
   #   <p>555 your office number</p>
   #   <p>123 your address street</p>
@@ -17,4 +17,4 @@ selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-Hi :wave:! I am Sumanyu. I am a first year Masters student at [NYU Courant](https://cs.nyu.edu/home/index.html) studying Computer Science. I am currently working with [Aishwarya Kamath](https://ashkamath.github.io/), [Nicolas Carion](https://www.nicolascarion.com/) and [Prof. Yann LeCun](http://yann.lecun.com/) on a Neuro-Symbolic Solver for Visual Question Answering. Previously, I was a Research Fellow at [IIT Delhi](https://home.iitd.ac.in/) where I had the pleasure of working with Dr. [Chetan Arora](https://www.cse.iitd.ac.in/~chetan/), Dr. [Saket Anand](http://faculty.iiitd.ac.in/~anands/) and Dr. [Vinay Namboodiri](https://vinaypn.github.io/). I graduated with a Bachelors in Computer Engineering from [Delhi Technological University](http://www.dtu.ac.in/) in 2020. My current research interests include multi-modal reasoning, Neuro-Symbolic AI e.t.c, however I also have prior background in algorithmic fairness, medical imaging, adversarial attacks and defenses.
+Hi :wave:! I am Sumanyu. I am a ML Engineer working on Causal Inference and Discovery at [Causely](https://www.causely.io). Previously, I was working towards my Masters in CS degree at [NYU Courant](https://cs.nyu.edu/home/index.html). At NYU, I briefly worked in multi-modal reasoning, Neuro-Symbolic AI at the [CILVR Lab](https://wp.nyu.edu/cilvr/). I also spent some time at [IIT Delhi](https://home.iitd.ac.in/) where I dabbled in algorithmic fairness and medical imaging. Before IIT, I was studying for my Bachelors in Computer Engineering degree at [Delhi Technological University](http://www.dtu.ac.in/). If you have an interesting opportunity or a project idea to collaborate on, do reach out!
