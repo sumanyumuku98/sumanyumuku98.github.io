@@ -40,6 +40,53 @@
 <link rel="stylesheet" href="/assets/css/main.css">
 <link rel="canonical" href="/projects/">
 
+<style>
+  .project-card {
+    border: 1px solid var(--global-text-color-light);
+    border-radius: 8px;
+    background-color: var(--global-bg-color);
+    color: var(--global-text-color);
+    transition: box-shadow 0.2s, transform 0.2s;
+    overflow: hidden;
+  }
+  .project-card:hover {
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+  }
+  .project-card .card-body {
+    padding: 2rem 1.5rem;
+  }
+  .project-card .card-title {
+    color: var(--global-text-color);
+    font-weight: 500;
+  }
+  .project-card .card-text {
+    color: var(--global-text-color-light);
+    font-size: 0.95rem;
+  }
+  .project-card .badge {
+    background-color: var(--global-theme-color);
+    color: #fff;
+    font-weight: 400;
+    font-size: 0.8rem;
+    padding: 4px 8px;
+  }
+  .project-card .project-icon {
+    background: #fff;
+    border-radius: 16px;
+    padding: 8px;
+    display: inline-block;
+  }
+  .project-card-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  .project-card-link:hover {
+    text-decoration: none;
+    color: inherit;
+  }
+</style>
+
 <!-- JQuery -->
 <!-- jQuery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
@@ -139,16 +186,18 @@
 
         <!-- Birdie -->
         <div class="col-sm-6 mb-4">
-          <a href="/projects/birdie/" style="text-decoration: none; color: inherit;">
-            <div class="card h-100">
+          <a href="/projects/birdie/" class="project-card-link">
+            <div class="project-card h-100">
               <div class="card-body text-center">
-                <img src="/assets/img/birdie/icon.png" alt="Birdie" width="80" height="80" class="rounded mb-3" />
+                <div class="project-icon mb-3">
+                  <img src="/assets/img/birdie/icon.png" alt="Birdie" width="72" height="72" />
+                </div>
                 <h4 class="card-title">Birdie</h4>
                 <p class="card-text">A minimal, privacy-first desktop client for X (Twitter). Built with Electron and TypeScript. Available on macOS, Windows, and Linux.</p>
                 <div>
-                  <span class="badge badge-secondary">Electron</span>
-                  <span class="badge badge-secondary">TypeScript</span>
-                  <span class="badge badge-secondary">Desktop App</span>
+                  <span class="badge">Electron</span>
+                  <span class="badge">TypeScript</span>
+                  <span class="badge">Desktop App</span>
                 </div>
               </div>
             </div>
