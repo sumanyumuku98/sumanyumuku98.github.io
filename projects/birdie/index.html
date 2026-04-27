@@ -39,6 +39,73 @@
 <link rel="stylesheet" href="/assets/css/main.css">
 <link rel="canonical" href="/projects/birdie/">
 
+<style>
+  .arch-diagram {
+    border: 1px solid var(--global-text-color-light);
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+    background-color: var(--global-code-bg-color);
+  }
+  .arch-diagram pre {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 12.5px;
+    line-height: 1.45;
+    margin: 0;
+    color: var(--global-text-color);
+    background: none;
+  }
+  .download-card {
+    border: 1px solid var(--global-text-color-light);
+    border-radius: 6px;
+    background-color: var(--global-bg-color);
+    color: var(--global-text-color);
+    transition: box-shadow 0.2s;
+  }
+  .download-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  .download-card .card-body {
+    padding: 1.5rem;
+  }
+  .download-card .card-text {
+    color: var(--global-text-color-light);
+  }
+  .download-card .btn-outline-dark {
+    color: var(--global-text-color);
+    border-color: var(--global-text-color-light);
+  }
+  .download-card .btn-outline-dark:hover {
+    background-color: var(--global-theme-color);
+    border-color: var(--global-theme-color);
+    color: #fff;
+  }
+  .download-card i.fab {
+    color: var(--global-theme-color);
+  }
+  .birdie-table {
+    color: var(--global-text-color);
+  }
+  .birdie-table th, .birdie-table td {
+    border-color: var(--global-text-color-light) !important;
+  }
+  .birdie-table code {
+    color: var(--global-theme-color);
+    background-color: var(--global-code-bg-color);
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+  .birdie-table kbd {
+    background-color: var(--global-code-bg-color);
+    color: var(--global-text-color);
+    border: 1px solid var(--global-text-color-light);
+    border-radius: 3px;
+    padding: 2px 6px;
+    font-size: 0.85em;
+  }
+</style>
+
 <!-- JQuery -->
 <!-- jQuery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
@@ -158,7 +225,7 @@
 
     <div class="row mb-4">
       <div class="col-md-4 mb-3">
-        <div class="card h-100 text-center p-3">
+        <div class="download-card h-100 text-center">
           <div class="card-body">
             <i class="fab fa-apple fa-3x mb-3"></i>
             <h5 class="card-title">macOS</h5>
@@ -171,7 +238,7 @@
         </div>
       </div>
       <div class="col-md-4 mb-3">
-        <div class="card h-100 text-center p-3">
+        <div class="download-card h-100 text-center">
           <div class="card-body">
             <i class="fab fa-windows fa-3x mb-3"></i>
             <h5 class="card-title">Windows</h5>
@@ -184,7 +251,7 @@
         </div>
       </div>
       <div class="col-md-4 mb-3">
-        <div class="card h-100 text-center p-3">
+        <div class="download-card h-100 text-center">
           <div class="card-body">
             <i class="fab fa-linux fa-3x mb-3"></i>
             <h5 class="card-title">Linux</h5>
@@ -223,8 +290,8 @@ yay <span class="nt">-S</span> birdie-bin
     </p>
 
     <!-- Architecture Diagram -->
-    <div class="card mb-4 p-3" style="background-color: #f8f9fa; overflow-x: auto;">
-<pre style="font-family: 'Roboto Mono', monospace; font-size: 13px; line-height: 1.5; margin: 0;">
+    <div class="arch-diagram">
+<pre>
 <strong>Birdie Architecture</strong>
 
  ┌─────────────────────────────────────────────────────────────────────┐
@@ -283,8 +350,8 @@ yay <span class="nt">-S</span> birdie-bin
     <!-- Data Flow Diagram -->
     <h3>Request &amp; Navigation Flow</h3>
 
-    <div class="card mb-4 p-3" style="background-color: #f8f9fa; overflow-x: auto;">
-<pre style="font-family: 'Roboto Mono', monospace; font-size: 13px; line-height: 1.5; margin: 0;">
+    <div class="arch-diagram">
+<pre>
 <strong>Navigation Guard &amp; External Link Handling</strong>
 
   User clicks link in X
@@ -316,8 +383,8 @@ yay <span class="nt">-S</span> birdie-bin
     <!-- Build & Distribution Pipeline -->
     <h3>Build &amp; Distribution Pipeline</h3>
 
-    <div class="card mb-4 p-3" style="background-color: #f8f9fa; overflow-x: auto;">
-<pre style="font-family: 'Roboto Mono', monospace; font-size: 13px; line-height: 1.5; margin: 0;">
+    <div class="arch-diagram">
+<pre>
 <strong>CI/CD &amp; Packaging Pipeline</strong>
 
   TypeScript Source
@@ -374,7 +441,7 @@ yay <span class="nt">-S</span> birdie-bin
 
     <h3>Main Process Modules</h3>
 
-    <table class="table table-sm table-bordered">
+    <table class="table table-sm table-bordered birdie-table">
       <thead>
         <tr><th>Module</th><th>Responsibility</th></tr>
       </thead>
@@ -402,7 +469,7 @@ yay <span class="nt">-S</span> birdie-bin
     </ul>
 
     <h3>Tech Stack</h3>
-    <table class="table table-sm table-bordered">
+    <table class="table table-sm table-bordered birdie-table">
       <thead>
         <tr><th>Layer</th><th>Technology</th></tr>
       </thead>
@@ -418,7 +485,7 @@ yay <span class="nt">-S</span> birdie-bin
     </table>
 
     <h3>Keyboard Shortcuts</h3>
-    <table class="table table-sm table-bordered">
+    <table class="table table-sm table-bordered birdie-table">
       <thead>
         <tr><th>Shortcut</th><th>Action</th></tr>
       </thead>
@@ -444,7 +511,7 @@ npm install
 npm run dev
 </code></pre></div></div>
 
-    <table class="table table-sm table-bordered">
+    <table class="table table-sm table-bordered birdie-table">
       <thead>
         <tr><th>Command</th><th>Description</th></tr>
       </thead>
