@@ -301,12 +301,12 @@ html.transition *:after {
 }
 
 .featured-work .card-tags .badge {
-  background-color: var(--global-code-bg-color);
-  color: var(--global-theme-color);
+  background-color: var(--global-theme-color);
+  color: #ffffff;
   font-size: 0.75rem;
   font-weight: 500;
-  padding: 0.3em 0.6em;
-  margin-right: 0.25rem;
+  padding: 0.35em 0.7em;
+  margin-right: 0.3rem;
   border-radius: 4px;
 }
 
