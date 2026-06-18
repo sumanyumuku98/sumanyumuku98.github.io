@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Nerveplane — Sumanyu Muku</title>
+    <meta name="description" content="Nerveplane: a local-first, MCP-compatible coordination plane for fleets of autonomous coding agents. Architecture, data flows, and design notes.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Nerveplane — a coordination plane for autonomous coding agents">
+    <meta property="og:description" content="A local-first, MCP-compatible nervous system that keeps parallel coding agents from colliding. Architecture and design writeup.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://sumanyumuku98.github.io/projects/nerveplane.html">
+
+    <!-- Bootstrap & MDB -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha512-MoRNloxbStBcD8z3M/2BmnT+rg4IsMxPkXaGh2zD6LGNNFE80W3onsAhRcMAMrSoyWL9xD7Ert0men7vR8LUZg==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" integrity="sha512-RO38pBRxYH3SoOprtPTD86JFOclM51/XTIdEPh5j8sj4tp8jmQIx26twG52UaLi//hQldfrh7e51WzP9wuP32Q==" crossorigin="anonymous" />
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+
+    <!-- Styles -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22></text></svg>">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="canonical" href="https://sumanyumuku98.github.io/projects/nerveplane.html">
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
+    <!-- Theming -->
+    <script src="/assets/js/theme.js"></script>
+    <script src="/assets/js/dark_mode.js"></script>
+
+    <!-- Page-specific styles for the writeup + diagrams -->
+    <style>
+      .project-hero {
+        text-align: center;
+        margin-top: 2rem;
+        margin-bottom: 1.5rem;
+      }
+      .project-hero h1 {
+        font-family: 'Roboto Slab', serif;
+        font-weight: 700;
+        color: var(--global-text-color);
+      }
+      .project-hero .tagline {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+        font-size: 1.25rem;
+        color: var(--global-theme-color);
+        margin-bottom: 1rem;
+      }
+      .project-meta .badge {
+        background-color: var(--global-theme-color);
+        color: #fff;
+        font-weight: 400;
+        margin: 0 .15rem;
+        padding: .4em .7em;
+      }
+      .writeup {
+        max-width: 820px;
+        margin: 0 auto;
+        padding-bottom: 6rem;
+      }
+      .writeup h2 {
+        font-family: 'Roboto Slab', serif;
+        font-weight: 500;
+        margin-top: 2.75rem;
+        margin-bottom: 1rem;
+        padding-bottom: .4rem;
+        border-bottom: 1px solid rgba(128, 128, 128, .25);
+        color: var(--global-text-color);
+      }
+      .writeup p, .writeup li {
+        color: var(--global-text-color);
+        line-height: 1.7;
+      }
+      .writeup .lead-note {
+        font-style: italic;
+        color: var(--global-text-color-light);
+        border-left: 3px solid var(--global-theme-color);
+        padding-left: 1rem;
+        margin: 1.5rem 0;
+      }
+
+      /* ---- Diagram primitives (pure CSS, theme-aware) ---- */
+      .diagram {
+        margin: 1.5rem 0 0.5rem;
+        padding: 1.25rem;
+        border: 1px solid rgba(128, 128, 128, .25);
+        border-radius: 10px;
+        background: var(--global-code-bg-color);
+      }
+      .diagram-caption {
+        text-align: center;
+        font-size: .85rem;
+        color: var(--global-text-color-light);
+        margin-bottom: 1.5rem;
+      }
+      .layer {
+        margin: 0 auto .7rem;
+        max-width: 720px;
+      }
+      .layer-label {
+        font-family: 'Roboto', sans-serif;
+        font-size: .72rem;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        color: var(--global-text-color-light);
+        margin-bottom: .35rem;
+      }
+      .node-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .5rem;
+      }
+      .node {
+        flex: 1 1 auto;
+        text-align: center;
+        padding: .6rem .5rem;
+        border-radius: 8px;
+        font-size: .85rem;
+        font-weight: 500;
+        border: 1px solid var(--global-theme-color);
+        color: var(--global-text-color);
+        background: var(--global-bg-color);
+      }
+      .node small {
+        display: block;
+        font-weight: 400;
+        font-size: .72rem;
+        color: var(--global-text-color-light);
+        margin-top: .15rem;
+      }
+      .node.solid {
+        background: var(--global-theme-color);
+        color: #fff;
+        border-color: var(--global-theme-color);
+      }
+      .node.solid small { color: rgba(255,255,255,.85); }
+      .flow-arrow {
+        text-align: center;
+        color: var(--global-theme-color);
+        font-size: 1.1rem;
+        line-height: 1;
+        margin: .15rem 0 .55rem;
+      }
+
+      /* ---- Data-flow steps ---- */
+      .flow-list {
+        list-style: none;
+        padding-left: 0;
+        counter-reset: flow;
+      }
+      .flow-list li {
+        position: relative;
+        padding: .65rem 0 .65rem 2.6rem;
+        border-bottom: 1px solid rgba(128, 128, 128, .15);
+      }
+      .flow-list li:last-child { border-bottom: none; }
+      .flow-list li::before {
+        counter-increment: flow;
+        content: counter(flow);
+        position: absolute;
+        left: 0;
+        top: .6rem;
+        width: 1.7rem;
+        height: 1.7rem;
+        line-height: 1.7rem;
+        text-align: center;
+        border-radius: 50%;
+        background: var(--global-theme-color);
+        color: #fff;
+        font-size: .8rem;
+        font-weight: 600;
+      }
+      .flow-list strong { color: var(--global-text-color); }
+
+      .back-link {
+        display: inline-block;
+        margin: 1.5rem 0 0;
+        color: var(--global-theme-color);
+        font-size: .9rem;
+      }
+      .repo-note {
+        font-size: .8rem;
+        color: var(--global-text-color-light);
+        text-align: center;
+        margin-top: 3rem;
+      }
+    </style>
+  </head>
+
+  <body class="fixed-top-nav">
+
+    <!-- Header -->
+    <header>
+      <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+        <div class="container">
+          <a class="navbar-brand title font-weight-lighter" href="/">
+            Sumanyu Muku
+          </a>
+          <div class="ml-auto">
+            <div class="toggle-container">
+              <a id="light-toggle">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container mt-5">
+      <a class="back-link" href="/"><i class="fas fa-arrow-left"></i> Back to home</a>
+
+      <!-- Project hero -->
+      <section class="project-hero">
+        <h1>Nerveplane</h1>
+        <p class="tagline">A coordination plane for fleets of autonomous coding agents</p>
+        <div class="project-meta">
+          <span class="badge">Local-first</span>
+          <span class="badge">MCP</span>
+          <span class="badge">TypeScript</span>
+          <span class="badge">Bun</span>
+          <span class="badge">Multi-agent</span>
+        </div>
+      </section>
+
+      <article class="writeup">
+
+        <p>
+          Nerveplane is a <strong>local-first, MCP-compatible coordination plane</strong> for autonomous
+          coding agents working in parallel across repos, branches, git worktrees, and microservice
+          contracts. As teams run many coding agents at once, the bottleneck shifts from code
+          <em>generation</em> to <em>coordination</em> — Nerveplane is that missing layer.
+        </p>
+
+        <h2>The problem</h2>
+        <p>
+          Run more than one coding agent at a time and they start stepping on each other: editing the
+          same files, breaking shared API or database contracts, and redoing work another agent already
+          finished — all with no shared awareness of what the others are doing. The more agents you add,
+          the worse the collisions get, until coordination — not code generation — is the thing slowing
+          you down.
+        </p>
+        <p class="lead-note">
+          Nerveplane gives a fleet of agents a common nervous system: passive sensing of what's
+          changing, conflict- and contract-aware routing of who needs to know, and a shared, durable
+          record of the decisions they make.
+        </p>
+
+        <h2>Architecture</h2>
+        <p>
+          Nerveplane runs as a <strong>single user-level daemon</strong> bound to localhost and shared by
+          every project on the machine — cross-repo coordination simply isn't possible with a per-repo
+          daemon. Clients (the CLI, Claude Code, Cursor, Codex, and friends) connect to that one daemon,
+          which is organized into layered subsystems over an embedded store.
+        </p>
+
+        <div class="diagram" role="img" aria-label="Layered architecture diagram of the Nerveplane daemon">
+          <div class="layer">
+            <div class="layer-label">Clients</div>
+            <div class="node-row">
+              <div class="node">CLI</div>
+              <div class="node">Claude Code</div>
+              <div class="node">Cursor</div>
+              <div class="node">Codex</div>
+            </div>
+          </div>
+          <div class="flow-arrow">&#8597;</div>
+
+          <div class="layer">
+            <div class="layer-label">Integration &mdash; how clients connect</div>
+            <div class="node-row">
+              <div class="node solid">MCP tools<small>stdio + HTTP</small></div>
+              <div class="node solid">REST API</div>
+              <div class="node solid">SSE streaming</div>
+              <div class="node solid">Hooks installer</div>
+            </div>
+          </div>
+          <div class="flow-arrow">&#8595;</div>
+
+          <div class="layer">
+            <div class="layer-label">Core &mdash; shared state</div>
+            <div class="node-row">
+              <div class="node">Agent Registry</div>
+              <div class="node">Presence<small>TTL liveness</small></div>
+              <div class="node">Tasks</div>
+            </div>
+            <div class="node-row" style="margin-top:.5rem;">
+              <div class="node">Event Log<small>append-only</small></div>
+              <div class="node">Decision ledger</div>
+              <div class="node">Artifacts</div>
+            </div>
+          </div>
+          <div class="flow-arrow">&#8595;</div>
+
+          <div class="layer">
+            <div class="layer-label">Sensing &middot; Service &middot; Routing</div>
+            <div class="node-row">
+              <div class="node">Repo watcher<small>git poll + fs watch (passive)</small></div>
+              <div class="node">Diff analyzer</div>
+            </div>
+            <div class="node-row" style="margin-top:.5rem;">
+              <div class="node">Service graph<small>contract parse + diff</small></div>
+              <div class="node">Routing<small>recipients &middot; severity &middot; suppression &middot; conflicts</small></div>
+            </div>
+          </div>
+          <div class="flow-arrow">&#8595;</div>
+
+          <div class="layer">
+            <div class="layer-label">Storage</div>
+            <div class="node-row">
+              <div class="node solid">Embedded SQL database<small>WAL mode, via ORM &mdash; path to a server DB later</small></div>
+            </div>
+          </div>
+        </div>
+        <p class="diagram-caption">Clients &rarr; daemon &rarr; layered subsystems &rarr; embedded store.</p>
+
+        <h2>Core components</h2>
+        <ul>
+          <li><strong>Integration</strong> — the MCP tool surface (stdio + HTTP), a REST API,
+            server-sent events for streaming, and a hooks installer for editor/agent clients.</li>
+          <li><strong>Core</strong> — an Agent Registry, Presence (TTL-based liveness), Tasks, an
+            append-only Event Log, a Decision ledger, and Artifacts.</li>
+          <li><strong>Sensing</strong> — a repo watcher (git polling + filesystem watch) plus a diff
+            analyzer. The key design point: it is <em>passive</em> — it senses git changes without
+            requiring agents to self-report.</li>
+          <li><strong>Service</strong> — a service-graph model plus contract parsers and diffing.</li>
+          <li><strong>Routing</strong> — recipient selection, severity scoring, deduplication and
+            suppression, and conflict detection.</li>
+          <li><strong>Storage</strong> — an embedded SQL database in WAL mode via an ORM, with a path to
+            a server database later.</li>
+        </ul>
+
+        <h2>Key data flows</h2>
+        <div class="diagram">
+          <ol class="flow-list">
+            <li><strong>Registration.</strong> An agent registers its capabilities, branch, and current
+              task, and receives a <em>join packet</em> describing the active fleet.</li>
+            <li><strong>Sync.</strong> Agents periodically pull routed updates — file and contract
+              changes, conflicts, and direct messages relevant to them.</li>
+            <li><strong>Publish / decision.</strong> Agents announce contract, schema, or shared-type
+              changes so affected agents are warned; durable choices are written to the decision
+              ledger.</li>
+            <li><strong>Chat.</strong> Direct agent-to-agent messaging in threads, including a blocking
+              "wait for reply" mode for real-time coordination.</li>
+            <li><strong>Passive sensing &rarr; routing.</strong> The watcher detects git and diff
+              changes, and the routing layer decides who needs to know — with severity scoring and
+              suppression to keep the noise down.</li>
+          </ol>
+        </div>
+
+        <h2>Tech stack</h2>
+        <p>
+          Nerveplane is built in <strong>TypeScript on the Bun runtime</strong>. It uses
+          <strong>MCP</strong> as the agent transport (stdio + HTTP) alongside a lightweight HTTP
+          framework for the REST API and SSE. A schema-validation library enforces typed boundaries, and
+          an ORM sits over an embedded SQL database in WAL mode (with an optional server database later).
+          Git integration is handled through a standard git library, and the whole thing ships as a
+          single compiled binary.
+        </p>
+
+        <h2>Why it matters</h2>
+        <p>
+          Parallel agents, left to their own devices, collide — overwriting each other's files, breaking
+          shared interfaces, and duplicating effort. By giving them passive sensing (no compliance
+          required from the agents themselves), conflict- and contract-aware routing, and a shared
+          decision record, Nerveplane keeps a fleet of agents <em>aligned instead of colliding</em>.
+        </p>
+
+        <p class="repo-note">
+          High-level technical overview. Implementation internals and product/strategy details are
+          intentionally omitted.
+        </p>
+
+        <a class="back-link" href="/"><i class="fas fa-arrow-left"></i> Back to home</a>
+      </article>
+    </div>
+
+    <!-- Footer -->
+    <footer class="fixed-bottom">
+      <div class="container mt-0">
+        &copy; 2026 Sumanyu Muku.
+        <a href="/assets/pdf/Sumanyu_Resume_AIML_2026.pdf" target="_blank" rel="noopener noreferrer">Download Resume</a>
+      </div>
+    </footer>
+
+    <!-- Bootstrap & MDB scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.4/umd/popper.min.js" integrity="sha512-eUQ9hGdLjBjY3F41CScH3UX+4JDSI9zXeroz7hJ+RteoCaY+GP/LDoM8AO+Pt+DRFw3nXqsjh9Zsts8hnYv8/A==" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha512-M5KW3ztuIICmVIhjSqXe01oV2bpe248gOxqmlcYrEzAvws7Pw3z6BK0iGbrwvdrUQUhi3eXgtxp5I8PDo9YfjQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js" integrity="sha512-Mug9KHKmroQFMLm93zGrjhibM2z2Obg9l6qFG2qKjXEXkMp/VDkI4uju9m4QKPjWSwQ6O2qzZEnJDEeCw0Blcw==" crossorigin="anonymous"></script>
+
+    <!-- Load Common JS -->
+    <script src="/assets/js/common.js"></script>
+  </body>
+
+</html>
