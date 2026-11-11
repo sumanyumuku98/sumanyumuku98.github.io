@@ -1,7 +1,7 @@
 /******************************************************************************
  * Blog index
  ******************************************************************************/
-.blog-header { padding: 3rem 0 1rem; }
+.blog-header { padding: 2.5rem 0 1.5rem; }
 .blog-header p { color: var(--global-text-color-light); }
 
 .blog-controls {
@@ -15,7 +15,7 @@
 .blog-controls select {
   background: var(--global-bg-color);
   color: var(--global-text-color);
-  border: 1px solid #c8c8c8;
+  border: 1px solid var(--global-input-border-color);
   border-radius: 6px;
   padding: 0.4rem 0.7rem;
   font-size: 0.95rem;
@@ -34,11 +34,11 @@
   cursor: pointer;
 }
 .tag-chip.active,
-.tag-chip:hover { background: var(--global-theme-color); color: #fff; }
+.tag-chip:hover { background: var(--global-theme-color); color: var(--global-on-theme-color); }
 
 .post-count { font-size: 0.85rem; color: var(--global-text-color-light); margin-bottom: 1rem; }
 
-.post-item { padding: 1.25rem 0; border-top: 1px solid #e8e8e8; }
+.post-item { padding: 1.25rem 0; border-top: 1px solid var(--global-border-color); }
 .post-item h3 { font-family: 'Roboto Slab', serif; font-size: 1.25rem; font-weight: 600; margin-bottom: 0.25rem; }
 .post-item h3 a { color: var(--global-text-color); }
 .post-item h3 a:hover { color: var(--global-theme-color); text-decoration: none; }
@@ -47,7 +47,8 @@
 
 .card-tags .badge {
   background-color: var(--global-theme-color);
-  color: #fff;
+  color: var(--global-on-theme-color);
+  box-shadow: none;
   font-size: 0.75rem;
   font-weight: 500;
   padding: 0.35em 0.7em;
@@ -70,9 +71,19 @@
 .post-body pre, .post-body code { background: var(--global-code-bg-color); border-radius: 4px; }
 .post-body pre { padding: 1rem; overflow-x: auto; }
 
-.comments { padding: 2rem 0 3rem; border-top: 1px solid #e8e8e8; margin-top: 2rem; }
+.comments { padding: 2rem 0 3rem; border-top: 1px solid var(--global-border-color); margin-top: 2rem; }
 .comments .section-heading { margin-bottom: 0.5rem; }
 .comments-note { font-size: 0.85rem; color: var(--global-text-color-light); margin-bottom: 1.25rem; }
 
-html[data-theme=dark] .post-item,
-html[data-theme=dark] .comments { border-top-color: #5a5a5a; }
+.blog-controls input:focus,
+.blog-controls select:focus {
+  outline: none;
+  border-color: var(--global-theme-color);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--global-theme-color) 25%, transparent);
+}
+.blog-controls input::placeholder { color: var(--global-text-color-light); }
+
+.no-posts {
+  padding: 3rem 0;
+  color: var(--global-text-color-light);
+}

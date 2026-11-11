@@ -4,4 +4,10 @@ $(document).ready(function() {
     mode_toggle.addEventListener("click", function() {
         toggleTheme(localStorage.getItem("theme"));
     });
+    mode_toggle.addEventListener("keydown", function(e) {
+        if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            toggleTheme(localStorage.getItem("theme"));
+        }
+    });
 });

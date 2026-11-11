@@ -4,48 +4,53 @@
 :root {
   --global-bg-color: #ffffff;
   --global-code-bg-color: rgba(181, 9, 172, 0.05);
-  --global-text-color: #000000;
-  --global-text-color-light: #828282;
+  --global-text-color: #1a1a1a;
+  --global-text-color-light: #6b6b6b;
   --global-theme-color: #B509AC;
   --global-hover-color: #B509AC;
-  --global-footer-bg-color: #424242;
-  --global-footer-text-color: #e8e8e8;
-  --global-footer-link-color: #ffffff;
-}
-:root .fa-sun {
-  display: none;
-}
-:root .fa-moon {
-  padding-left: 10px;
-  padding-top: 12px;
-  display: block;
+  --global-border-color: #e6e6e6;
+  --global-input-border-color: #c4c4c4;
+  --global-card-bg-color: #ffffff;
+  --global-on-theme-color: #ffffff;
+  --global-footer-bg-color: var(--global-bg-color);
+  --global-footer-text-color: var(--global-text-color-light);
+  --global-footer-link-color: var(--global-text-color);
+  color-scheme: light;
 }
 
 html[data-theme=dark] {
-  --global-bg-color: #424242;
-  --global-code-bg-color: #2c3237;
-  --global-text-color: #e8e8e8;
-  --global-text-color-light: #e8e8e8;
-  --global-theme-color: #2698BA;
-  --global-hover-color: #2698BA;
-  --global-footer-bg-color: #e8e8e8;
-  --global-footer-text-color: #424242;
-  --global-footer-link-color: #000000;
+  --global-bg-color: #15171a;
+  --global-code-bg-color: #23272c;
+  --global-text-color: #e4e6e8;
+  --global-text-color-light: #9aa1a8;
+  --global-theme-color: #4fb3d6;
+  --global-hover-color: #4fb3d6;
+  --global-border-color: #2a2e33;
+  --global-input-border-color: #3a3f45;
+  --global-card-bg-color: #1b1e22;
+  --global-on-theme-color: #0b1418;
+  color-scheme: dark;
 }
-html[data-theme=dark] .fa-sun {
-  padding-left: 10px;
-  padding-top: 12px;
-  display: block;
-}
-html[data-theme=dark] .fa-moon {
-  display: none;
+
+/* Theme toggle: exactly one icon shows, centered in a fixed hit area. */
+.fa-sun { display: none; }
+.fa-moon { display: inline-block; }
+html[data-theme=dark] .fa-sun { display: inline-block; }
+html[data-theme=dark] .fa-moon { display: none; }
+
+::selection {
+  background: var(--global-theme-color);
+  color: var(--global-on-theme-color);
 }
 
 /******************************************************************************
  * Base
  ******************************************************************************/
 body {
-  padding-bottom: 70px;
+  padding-bottom: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   color: var(--global-text-color);
   background-color: var(--global-bg-color);
 }
@@ -83,9 +88,9 @@ html.transition *:after {
  ******************************************************************************/
 .navbar {
   box-shadow: none;
-  border-bottom: 1px solid #e8e8e8;
+  border-bottom: 1px solid var(--global-border-color);
   background-color: var(--global-bg-color);
-  opacity: 0.95;
+  opacity: 0.97;
 }
 
 .navbar.navbar-light a:hover {
@@ -97,15 +102,34 @@ html.transition *:after {
 
 .toggle-container {
   cursor: pointer;
+  display: flex;
+}
+
+#light-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  color: var(--global-text-color);
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+#light-toggle:hover {
+  color: var(--global-theme-color);
+  background-color: var(--global-code-bg-color);
 }
 
 .navbar .nav-blog-link {
-  color: var(--global-text-color);
-  font-weight: 500;
-  margin-right: 0.5rem;
+  color: var(--global-text-color-light);
+  font-size: 1rem;
+  font-weight: 400;
+  margin-right: 0.75rem;
+  transition: color 0.2s ease;
 }
-.navbar .nav-blog-link:hover {
-  color: var(--global-theme-color);
+.navbar .nav-blog-link:hover,
+.navbar .nav-blog-link[aria-current=page] {
+  color: var(--global-text-color);
 }
 
 /******************************************************************************
@@ -113,7 +137,7 @@ html.transition *:after {
  ******************************************************************************/
 .hero {
   text-align: center;
-  padding: 4rem 0 2rem;
+  padding: 2rem 0 1rem;
 }
 
 .hero img {
@@ -243,8 +267,8 @@ html.transition *:after {
 
 .featured-work .card {
   border-radius: 12px;
-  border: 1px solid #e8e8e8;
-  background-color: var(--global-bg-color);
+  border: 1px solid var(--global-border-color);
+  background-color: var(--global-card-bg-color);
   transition: box-shadow 0.3s ease;
 }
 
@@ -264,16 +288,17 @@ html.transition *:after {
   margin-bottom: 0.75rem;
 }
 
-.featured-work .card-text {
+.featured-work .card .card-body .card-text {
   font-size: 0.9rem;
   line-height: 1.5;
-  color: var(--global-text-color);
+  color: var(--global-text-color-light);
   margin-bottom: 1rem;
 }
 
 .featured-work .card-tags .badge {
   background-color: var(--global-theme-color);
-  color: #ffffff;
+  color: var(--global-on-theme-color);
+  box-shadow: none;
   font-size: 0.75rem;
   font-weight: 500;
   padding: 0.35em 0.7em;
@@ -283,7 +308,7 @@ html.transition *:after {
 
 .featured-work .card-footer {
   background: transparent;
-  border-top: 1px solid #e8e8e8;
+  border-top: 1px solid var(--global-border-color);
   padding: 0.75rem 1.5rem;
   font-size: 0.9rem;
 }
@@ -300,19 +325,22 @@ html.transition *:after {
 /******************************************************************************
  * Footer
  ******************************************************************************/
-footer.fixed-bottom {
+footer.site-footer {
+  margin-top: auto !important;
+  border-top: 1px solid var(--global-border-color);
   background-color: var(--global-footer-bg-color);
-  font-size: 0.75rem;
+  font-size: 0.8rem;
+  margin-top: 2rem;
 }
-footer.fixed-bottom .container {
+footer.site-footer .container {
   color: var(--global-footer-text-color);
-  padding-top: 9px;
-  padding-bottom: 8px;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
 }
-footer.fixed-bottom a {
+footer.site-footer a {
   color: var(--global-footer-link-color);
 }
-footer.fixed-bottom a:hover {
+footer.site-footer a:hover {
   color: var(--global-theme-color);
   text-decoration: none;
 }
@@ -334,4 +362,20 @@ footer.fixed-bottom a:hover {
     padding-left: 15px;
     padding-right: 15px;
   }
+}
+
+[hidden] {
+  display: none !important;
+}
+
+a:focus-visible,
+button:focus-visible,
+#light-toggle:focus-visible {
+  outline: 2px solid var(--global-theme-color);
+  outline-offset: 2px;
+}
+
+/* Keep brand + Blog link + theme toggle on one row at phone widths. */
+.navbar > .container {
+  flex-wrap: nowrap;
 }

@@ -6,7 +6,7 @@
   if (!mount) return;
 
   const giscusTheme = () =>
-    document.documentElement.getAttribute("data-theme") === "dark" ? "dark_dimmed" : "light";
+    document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
 
   const s = document.createElement("script");
   s.src = "https://giscus.app/client.js";
