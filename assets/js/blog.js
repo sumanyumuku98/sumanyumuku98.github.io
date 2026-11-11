@@ -47,9 +47,10 @@
 
     countEl.textContent = `${shown.length} of ${posts.length} post${posts.length === 1 ? "" : "s"}`;
     if (!posts.length) {
-      countEl.textContent = "";
-      tagsEl.innerHTML = "";
-      listEl.innerHTML = `<p class="no-posts">No posts yet — check back soon.</p>`;
+      countEl.hidden = true;
+      tagsEl.hidden = true;
+      document.getElementById("blog-controls").hidden = true;
+      listEl.innerHTML = `<p class="no-posts">No posts yet. The first one is on its way.</p>`;
       return;
     }
     listEl.innerHTML = shown.length ? shown.map((p) => `
