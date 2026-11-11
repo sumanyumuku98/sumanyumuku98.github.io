@@ -46,6 +46,12 @@
       .sort(SORTS[state.sort]);
 
     countEl.textContent = `${shown.length} of ${posts.length} post${posts.length === 1 ? "" : "s"}`;
+    if (!posts.length) {
+      countEl.textContent = "";
+      tagsEl.innerHTML = "";
+      listEl.innerHTML = `<p class="no-posts">No posts yet — check back soon.</p>`;
+      return;
+    }
     listEl.innerHTML = shown.length ? shown.map((p) => `
       <article class="post-item">
         <h3><a href="/blog/${esc(p.slug)}/">${esc(p.title)}</a></h3>
