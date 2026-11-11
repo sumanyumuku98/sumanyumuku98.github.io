@@ -1,0 +1,78 @@
+/******************************************************************************
+ * Blog index
+ ******************************************************************************/
+.blog-header { padding: 3rem 0 1rem; }
+.blog-header p { color: var(--global-text-color-light); }
+
+.blog-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.blog-controls input,
+.blog-controls select {
+  background: var(--global-bg-color);
+  color: var(--global-text-color);
+  border: 1px solid #c8c8c8;
+  border-radius: 6px;
+  padding: 0.4rem 0.7rem;
+  font-size: 0.95rem;
+}
+.blog-controls input { flex: 1 1 220px; min-width: 0; }
+.blog-controls label { margin: 0; font-size: 0.9rem; color: var(--global-text-color-light); }
+
+.tag-filters { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.75rem; }
+.tag-chip {
+  background: transparent;
+  color: var(--global-text-color);
+  border: 1px solid var(--global-theme-color);
+  border-radius: 999px;
+  padding: 0.2rem 0.75rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.tag-chip.active,
+.tag-chip:hover { background: var(--global-theme-color); color: #fff; }
+
+.post-count { font-size: 0.85rem; color: var(--global-text-color-light); margin-bottom: 1rem; }
+
+.post-item { padding: 1.25rem 0; border-top: 1px solid #e8e8e8; }
+.post-item h3 { font-family: 'Roboto Slab', serif; font-size: 1.25rem; font-weight: 600; margin-bottom: 0.25rem; }
+.post-item h3 a { color: var(--global-text-color); }
+.post-item h3 a:hover { color: var(--global-theme-color); text-decoration: none; }
+.post-meta { font-size: 0.85rem; color: var(--global-text-color-light); margin-bottom: 0.5rem; }
+.post-item p { margin-bottom: 0.5rem; }
+
+.card-tags .badge {
+  background-color: var(--global-theme-color);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.35em 0.7em;
+  margin-right: 0.3rem;
+  border-radius: 4px;
+  border: 0;
+  cursor: pointer;
+}
+
+.link-btn { background: none; border: 0; padding: 0; color: var(--global-theme-color); text-decoration: underline; cursor: pointer; }
+
+/******************************************************************************
+ * Single post
+ ******************************************************************************/
+.post { padding: 3rem 0 1rem; }
+.post .back-link { font-size: 0.9rem; }
+.post h1 { font-family: 'Roboto Slab', serif; font-weight: 700; font-size: 2.1rem; margin: 1rem 0 0.5rem; }
+.post-body { font-size: 1.05rem; line-height: 1.75; margin-top: 2rem; }
+.post-body h2 { font-family: 'Roboto Slab', serif; font-size: 1.4rem; margin-top: 2rem; }
+.post-body pre, .post-body code { background: var(--global-code-bg-color); border-radius: 4px; }
+.post-body pre { padding: 1rem; overflow-x: auto; }
+
+.comments { padding: 2rem 0 3rem; border-top: 1px solid #e8e8e8; margin-top: 2rem; }
+.comments .section-heading { margin-bottom: 0.5rem; }
+.comments-note { font-size: 0.85rem; color: var(--global-text-color-light); margin-bottom: 1.25rem; }
+
+html[data-theme=dark] .post-item,
+html[data-theme=dark] .comments { border-top-color: #5a5a5a; }
