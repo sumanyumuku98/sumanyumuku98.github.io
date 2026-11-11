@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Blog — Sumanyu Muku</title>
+    <meta name="description" content="Notes on AI, LLMs, and the science of learning.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Blog — Sumanyu Muku">
+    <meta property="og:description" content="Notes on AI, LLMs, and the science of learning.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sumanyumuku98.github.io/blog/">
+
+    <!-- Bootstrap & MDB -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha512-MoRNloxbStBcD8z3M/2BmnT+rg4IsMxPkXaGh2zD6LGNNFE80W3onsAhRcMAMrSoyWL9xD7Ert0men7vR8LUZg==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" integrity="sha512-RO38pBRxYH3SoOprtPTD86JFOclM51/XTIdEPh5j8sj4tp8jmQIx26twG52UaLi//hQldfrh7e51WzP9wuP32Q==" crossorigin="anonymous" />
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+
+    <!-- Styles -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22></text></svg>">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/blog.css">
+    <link rel="canonical" href="https://sumanyumuku98.github.io/blog/">
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
+    <!-- Theming -->
+    <script src="/assets/js/theme.js"></script>
+    <script src="/assets/js/dark_mode.js"></script>
+  </head>
+
+  <body class="fixed-top-nav">
+
+    <!-- Header -->
+    <header>
+      <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+        <div class="container">
+          <a class="navbar-brand title font-weight-lighter" href="/">
+            Sumanyu Muku
+          </a>
+          <div class="ml-auto d-flex align-items-center">
+            <a class="nav-blog-link" href="/blog/">Blog</a>
+            <div class="toggle-container">
+              <a id="light-toggle">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container">
+      <section class="blog-header">
+        <h1 class="section-heading mb-2">Blog</h1>
+        <p>Notes on AI, LLMs, and the science of learning.</p>
+      </section>
+
+      <section class="blog-list">
+        <div class="blog-controls">
+          <input id="post-search" type="search" placeholder="Search posts…" aria-label="Search posts">
+          <label for="post-sort">Sort</label>
+          <select id="post-sort">
+            <option value="newest">Newest first</option>
+            <option value="oldest">Oldest first</option>
+            <option value="shortest">Quickest read</option>
+            <option value="longest">Longest read</option>
+            <option value="title">Title A–Z</option>
+          </select>
+        </div>
+        <div id="tag-filters" class="tag-filters" role="group" aria-label="Filter by tag"></div>
+        <div id="post-count" class="post-count" aria-live="polite"></div>
+        <div id="post-list">
+          <noscript><p><a href="/blog/welcome/">Welcome to the blog</a></p></noscript>
+        </div>
+      </section>
+    </div>
+
+    <script src="/blog/posts.js"></script>
+    <script src="/assets/js/blog.js"></script>
+
+    <!-- Footer -->
+    <footer class="fixed-bottom">
+      <div class="container mt-0">
+        &copy; 2026 Sumanyu Muku.
+        <a href="/assets/pdf/Sumanyu_Resume_AIML_2026.pdf" target="_blank" rel="noopener noreferrer">Download Resume</a>
+      </div>
+    </footer>
+
+    <!-- Bootstrap & MDB scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.4/umd/popper.min.js" integrity="sha512-eUQ9hGdLjBjY3F41CScH3UX+4JDSI9zXeroz7hJ+RteoCaY+GP/LDoM8AO+Pt+DRFw3nXqsjh9Zsts8hnYv8/A==" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha512-M5KW3ztuIICmVIhjSqXe01oV2bpe248gOxqmlcYrEzAvws7Pw3z6BK0iGbrwvdrUQUhi3eXgtxp5I8PDo9YfjQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js" integrity="sha512-Mug9KHKmroQFMLm93zGrjhibM2z2Obg9l6qFG2qKjXEXkMp/VDkI4uju9m4QKPjWSwQ6O2qzZEnJDEeCw0Blcw==" crossorigin="anonymous"></script>
+
+    <!-- Load Common JS -->
+    <script src="/assets/js/common.js"></script>
+  </body>
+
+</html>

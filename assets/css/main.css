@@ -99,6 +99,15 @@ html.transition *:after {
   cursor: pointer;
 }
 
+.navbar .nav-blog-link {
+  color: var(--global-text-color);
+  font-weight: 500;
+  margin-right: 0.5rem;
+}
+.navbar .nav-blog-link:hover {
+  color: var(--global-theme-color);
+}
+
 /******************************************************************************
  * Hero Section
  ******************************************************************************/
@@ -160,44 +169,6 @@ html.transition *:after {
   text-decoration: none;
 }
 
-.hero .social-icons .substack-icon {
-  fill: var(--global-text-color);
-  transition: fill 0.2s ease-in-out;
-  vertical-align: middle;
-}
-
-.hero .social-icons a:hover .substack-icon {
-  fill: var(--global-theme-color);
-}
-
-/******************************************************************************
- * CTA Banner
- ******************************************************************************/
-.cta-banner {
-  background: var(--global-theme-color);
-  padding: 1.25rem 0;
-  margin: 2rem 0;
-}
-
-.cta-banner a {
-  color: #ffffff;
-  font-size: 1rem;
-  font-weight: 500;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.cta-banner a:hover {
-  color: #ffffff;
-  text-decoration: underline;
-}
-
-.cta-banner .substack-icon-sm {
-  fill: #ffffff;
-  vertical-align: middle;
-}
 
 /******************************************************************************
  * Experience Timeline
@@ -357,13 +328,6 @@ footer.fixed-bottom a:hover {
   .hero .bio {
     font-size: 0.95rem;
     padding: 0 1rem;
-  }
-
-  .cta-banner .col-md-6 {
-    margin-bottom: 0.75rem;
-  }
-  .cta-banner .col-md-6:last-child {
-    margin-bottom: 0;
   }
 
   .featured-work .col-md-4 {
